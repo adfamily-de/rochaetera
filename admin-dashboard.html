@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - AdventistFam</title>
+  <meta name="description" content="Painel administrativo da AdventistFam">
+  
+  <link rel="stylesheet" href="estilos-globais.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    .admin-sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 250px;
+      background-color: var(--cor-primaria-escura);
+      color: white;
+      padding: 2rem 1rem;
+      z-index: 1001;
+    }
+    
+    .admin-sidebar h2 {
+      color: white;
+      margin-bottom: 2rem;
+      font-size: 1.3rem;
+      text-align: center;
+    }
+    
+    .admin-sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .admin-sidebar li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .admin-sidebar a {
+      color: rgba(255,255,255,0.8);
+      display: block;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .admin-sidebar a:hover, .admin-sidebar a.ativo {
+      background-color: rgba(255,255,255,0.1);
+      color: white;
+    }
+    
+    .admin-main {
+      margin-left: 250px;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+    
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--cor-borda);
+    }
+    
+    .admin-card {
+      background-color: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--sombra-suave);
+    }
+    
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .admin-table th, .admin-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--cor-borda);
+    }
+    
+    .admin-table th {
+      background-color: var(--cor-fundo-alt);
+      font-weight: 600;
+      color: var(--cor-texto);
+    }
+    
+    .admin-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+    
+    .admin-badge-success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    
+    .admin-badge-warning {
+      background-color: #fff3cd;
+      color: #856404;
+    }
+    
+    @media (max-width: 768px) {
+      .admin-sidebar {
+        width: 100%;
+        position: relative;
+      }
+      .admin-main {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body style="background-color: var(--cor-fundo-alt);">
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <h2><i class="fas fa-globe-africa"></i> AdventistFam</h2>
+    <nav>
+      <ul>
+        <li><a href="#dashboard" class="ativo"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+        <li><a href="#visitas"><i class="fas fa-eye"></i> Estatísticas</a></li>
+        <li><a href="#oracoes"><i class="fas fa-praying-hands"></i> Orações</a></li>
+        <li><a href="#doacoes"><i class="fas fa-donate"></i> Doações</a></li>
+        <li><a href="#conteudo"><i class="fas fa-edit"></i> Editar Conteúdo</a></li>
+        <li><a href="index.html"><i class="fas fa-arrow-left"></i> Voltar ao Site</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="admin-main">
+    <div class="admin-header">
+      <h1>Dashboard Administrativo</h1>
+      <div>
+        <span style="color: var(--cor-texto-muted);">Bem-vindo, Administrador</span>
+      </div>
+    </div>
+
+    <!-- ESTATÍSTICAS -->
+    <section id="dashboard">
+      <h2 style="margin-bottom: 1.5rem;">Visão Geral</h2>
+      
+      <div class="grid grid-4" style="margin-bottom: 2rem;">
+        <div class="admin-card" style="text-align: center;">
+          <div style="font-size: 2.5rem; color: var(--cor-primaria); margin-bottom: 0.5rem;">
+            <i class="fas fa-eye"></i>
+          </div>
+          <h3 id="total-visitas">0</h3>
+          <p style="color: var(--cor-texto-claro); margin: 0;">Total de Visitas</p>
+        </div>
+        
+        <div class="admin-card" style="text-align: center;">
+          <div style="font-size: 2.5rem; color: var(--cor-secundaria); margin-bottom: 0.5rem;">
+            <i class="fas fa-praying-hands"></i>
+          </div>
+          <h3 id="total-oracoes">0</h3>
+          <p style="color: var(--cor-texto-claro); margin: 0;">Pessoas Oraram</p>
+        </div>
+        
+        <div class="admin-card" style="text-align: center;">
+          <div style="font-size: 2.5rem; color: var(--cor-destaque); margin-bottom: 0.5rem;">
+            <i class="fas fa-hand-holding-heart"></i>
+          </div>
+          <h3 id="total-doacoes">0</h3>
+          <p style="color: var(--cor-texto-claro); margin: 0;">Doações Registradas</p>
+        </div>
+        
+        <div class="admin-card" style="text-align: center;">
+          <div style="font-size: 2.5rem; color: #6B5B95; margin-bottom: 0.5rem;">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>13</h3>
+          <p style="color: var(--cor-texto-claro); margin: 0;">Membros da Equipe</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISITAS POR PÁGINA -->
+    <section id="visitas" style="margin-bottom: 2rem;">
+      <h2 style="margin-bottom: 1.5rem;">Visitas por Página</h2>
+      
+      <div class="admin-card">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Página</th>
+              <th>Visitas</th>
+              <th>Última Visita</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-visitas">
+            <tr>
+              <td><i class="fas fa-home"></i> Página Inicial</td>
+              <td id="visitas-index">0</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-users"></i> Casais Líderes</td>
+              <td id="visitas-casais">0</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-cross"></i> Obra de Cristo</td>
+              <td id="visitas-obra">0</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-tint"></i> Doação de Sangue</td>
+              <td id="visitas-sangue">0</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-hand-holding-usd"></i> Doação Financeira</td>
+              <td id="visitas-doacao">0</td>
+              <td>-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ORAÇÕES -->
+    <section id="oracoes" style="margin-bottom: 2rem;">
+      <h2 style="margin-bottom: 1.5rem;">Pessoas que Oraram</h2>
+      
+      <div class="admin-card">
+        <div style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
+          <div style="text-align: center;">
+            <div style="font-size: 4rem; color: var(--cor-primaria);">
+              <i class="fas fa-praying-hands"></i>
+            </div>
+          </div>
+          <div>
+            <h3 style="font-size: 3rem; color: var(--cor-primaria); margin-bottom: 0.5rem;" id="oracoes-total">0</h3>
+            <p style="color: var(--cor-texto-claro); font-size: 1.1rem;">
+              pessoas clicaram em "Estive aqui, vou orar"
+            </p>
+            <p style="color: var(--cor-texto-muted); font-size: 0.9rem;">
+              Este número representa quantas pessoas se comprometeram a orar pela missão.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GERENCIAR CONTEÚDO -->
+    <section id="conteudo">
+      <h2 style="margin-bottom: 1.5rem;">Gerenciar Conteúdo</h2>
+      
+      <div class="grid grid-2">
+        <div class="admin-card">
+          <h3 style="margin-bottom: 1rem;"><i class="fas fa-user-edit"></i> Dados dos Líderes</h3>
+          <p style="color: var(--cor-texto-claro); margin-bottom: 1rem;">Edite os nomes dos casais líderes e suas informações.</p>
+          <button class="btn btn-primario" onclick="alert('Funcionalidade em desenvolvimento')">
+            <i class="fas fa-edit"></i> Editar
+          </button>
+        </div>
+        
+        <div class="admin-card">
+          <h3 style="margin-bottom: 1rem;"><i class="fas fa-image"></i> Fotos da Obra</h3>
+          <p style="color: var(--cor-texto-claro); margin-bottom: 1rem;">Atualize as fotos dos projetos e atividades.</p>
+          <button class="btn btn-primario" onclick="alert('Funcionalidade em desenvolvimento')">
+            <i class="fas fa-upload"></i> Atualizar
+          </button>
+        </div>
+        
+        <div class="admin-card">
+          <h3 style="margin-bottom: 1rem;"><i class="fas fa-newspaper"></i> Blog/Notícias</h3>
+          <p style="color: var(--cor-texto-claro); margin-bottom: 1rem;">Publique novas cartas e atualizações da missão.</p>
+          <button class="btn btn-primario" onclick="alert('Funcionalidade em desenvolvimento')">
+            <i class="fas fa-plus"></i> Nova Publicação
+          </button>
+        </div>
+        
+        <div class="admin-card">
+          <h3 style="margin-bottom: 1rem;"><i class="fas fa-chart-bar"></i> Relatórios</h3>
+          <p style="color: var(--cor-texto-claro); margin-bottom: 1rem;">Gere relatórios de visitas e engajamento.</p>
+          <button class="btn btn-primario" onclick="alert('Funcionalidade em desenvolvimento')">
+            <i class="fas fa-file-export"></i> Gerar Relatório
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="scripts-globais.js"></script>
+  <script>
+    // Carregar estatísticas do localStorage
+    function carregarEstatisticas() {
+      // Total de visitas (soma de todas as páginas)
+      const paginas = ['index.html', 'pagina-casais-lideres.html', 'pagina-obra-cristo.html', 
+                       'pagina-doacao-sangue.html', 'pagina-doacao-financeira.html'];
+      let totalVisitas = 0;
+      
+      paginas.forEach(pagina => {
+        const visitas = parseInt(localStorage.getItem(`visitas_${pagina}`)) || 0;
+        totalVisitas += visitas;
+        
+        // Atualizar tabela
+        const elemento = document.getElementById(`visitas-${pagina.replace('.html', '').replace('pagina-', '')}`);
+        if (elemento) {
+          elemento.textContent = visitas.toLocaleString();
+        }
+      });
+      
+      document.getElementById('total-visitas').textContent = totalVisitas.toLocaleString();
+      
+      // Total de orações
+      const oracoes = parseInt(localStorage.getItem('oracoes_adventistfam')) || 0;
+      document.getElementById('total-oracoes').textContent = oracoes.toLocaleString();
+      document.getElementById('oracoes-total').textContent = oracoes.toLocaleString();
+      
+      // Doações (simulado - em produção viria de backend)
+      document.getElementById('total-doacoes').textContent = '0';
+    }
+    
+    // Carregar ao iniciar
+    carregarEstatisticas();
+    
+    // Atualizar a cada 30 segundos
+    setInterval(carregarEstatisticas, 30000);
+  </script>
+</body>
+</html>
