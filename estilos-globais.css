@@ -1046,3 +1046,18 @@ a:hover {
 .texto-primaria { color: var(--cor-primaria); }
 .texto-secundaria { color: var(--cor-secundaria); }
 .texto-destaque { color: var(--cor-destaque); }
+
+/* HERO BACKGROUND IMAGE */
+.hero-fundo {
+  background-image: url("hero-family.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
